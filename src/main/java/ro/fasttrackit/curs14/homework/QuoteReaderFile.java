@@ -14,19 +14,20 @@ public class QuoteReaderFile {
     }
 
     public List<Quote> getQuotesList() throws Exception {
+       int count=0;
         List<Quote> result = new ArrayList<>();
         try(BufferedReader fileReader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = fileReader.readLine()) != null) {
-                result.add(readLine(line));
+                result.add(readLine(++count, line));
             }
         }
         return result;
     }
 
-    private static Quote readLine(String line) {
+    private static Quote readLine(int id, String line) {
         String[] tokens = line.split(Pattern.quote("~"));
-        return new Quote(1,tokens[0],tokens[1],true);
+        return new Quote(id,tokens[0],tokens[1],false);
 
     }
 }
