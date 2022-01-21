@@ -16,7 +16,7 @@ public class QuoteService {
     public List<String> getAllQuotes() {
         List<String> allQuotes = new ArrayList<>();
         for (Quote element : quotes) { //am scris "element" in loc de "quote" ca sa nu se confunde obiectul cu state-ul quote
-            allQuotes.add(element.getQuote()); //mai trebuie sa fac metoda add in clasa Quote??
+            allQuotes.add(element.getQuote());
         }
         return allQuotes;
     }
@@ -36,7 +36,9 @@ public class QuoteService {
     public List<String> getAuthors() {
         List<String> allAuthors = new ArrayList<>();
         for (Quote element : quotes) {
-            allAuthors.add(element.getAuthor());
+            if (!allAuthors.contains(element.getAuthor())) {
+                allAuthors.add(element.getAuthor());
+            }
         }
         return allAuthors;
     }
@@ -59,25 +61,9 @@ public class QuoteService {
     }
 
     public String getRandomQuote() {
-        String foundQuote = "";
-        System.out.println("Introduce the id of the quote: ");
         Random random = new Random();
-        int userId = random.nextInt();
-        for (Quote element : quotes) {
-            if (userId == element.getId()) {
-                foundQuote = "" + element.getQuote();
-            }
-        }
-        return foundQuote;
-    }
-
-    public int findId(Quote givenQuote) {
-        int foundID = 0;
-        for (int i = 1; i< quotes.size(); i++) {
-            if (givenQuote == quotes.get(i)){
-                foundID = i;
-            }
-        }
-        return foundID;
+        int randomIdPosition = random.nextInt(quotes.size()); //nextInt e de la 0 la size()-1
+        //intoarce prin get obiectul Quote de pe pozitia randomIdPosition
+        return quotes.get(randomIdPosition).getQuote();
     }
 }

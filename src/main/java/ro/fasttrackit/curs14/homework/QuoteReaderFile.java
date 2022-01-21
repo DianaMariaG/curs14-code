@@ -14,7 +14,7 @@ public class QuoteReaderFile {
     }
 
     public List<Quote> getQuotesList() throws Exception {
-       int count=0;
+        int count=0;
         List<Quote> result = new ArrayList<>();
         try(BufferedReader fileReader = new BufferedReader(new FileReader(filePath))) {
             String line;
